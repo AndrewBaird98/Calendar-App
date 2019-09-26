@@ -59,7 +59,7 @@ def close():
     window.destroy()
     exit()
 
-
+##UI code
 ##Main window:
 window = Tk()
 window.title("My Window")
