@@ -1,0 +1,13 @@
+myString = "Metallica\"$\"8/10/18\"$\"4:00\"$\"San Diego\"$\"California\"$\"$150\"$\"121 Park Ave\"$\"Metal\"$\"Metallica will perform at Petco Park woth Gojira and Avenged Sevenfold\"$\"youtube.com\"$\"No Restriction"
+Name, Date,Time,City,State,Price,Address,Category,Description,Link,Restriction = myString.split('\"$\"', 11)
+print(Name)
+print(Date)
+print(Time)
+print(City)
+print(State)
+print(Price)
+print(Address)
+print(Category)
+print(Description)
+print(Link)
+print(Restriction)
