@@ -1,13 +1,21 @@
-myString = "Metallica\"$\"8/10/18\"$\"4:00\"$\"San Diego\"$\"California\"$\"$150\"$\"121 Park Ave\"$\"Metal\"$\"Metallica will perform at Petco Park woth Gojira and Avenged Sevenfold\"$\"youtube.com\"$\"No Restriction"
-Name, Date,Time,City,State,Price,Address,Category,Description,Link,Restriction = myString.split('\"$\"', 11)
-print(Name)
-print(Date)
-print(Time)
-print(City)
-print(State)
-print(Price)
-print(Address)
-print(Category)
-print(Description)
-print(Link)
-print(Restriction)
+import re
+import io
+
+
+def main():
+
+    with io.open("DummyData.txt", "r", newline=None) as fd:
+        List = []
+        for line in fd:
+
+            line = line.rstrip()
+            if len(line) > 0:
+                print('\n')
+                tokens = line.split('\";\"')[0].split('\"$\"')
+                for x in tokens:
+                    List.append(x)
+                    print(x)
+
+
+if __name__ == "__main__":
+    main()
