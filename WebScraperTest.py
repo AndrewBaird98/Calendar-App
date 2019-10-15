@@ -12,10 +12,13 @@ options.add_argument('--ignore-certificate-errors')
 options.add_argument('--incognito')
 options.add_argument('--headless')
 driver = webdriver.Chrome(executable_path=chromedriver, options=options)
-driver.get("https://www.google.com/")
+driver.get("https://www.sandiego.org/explore/events.aspx")
 soup = BeautifulSoup(driver.page_source,'lxml')
-for links in soup.find_all('a'):
-    print(links.get('href'),links.get_text())
+#print(soup)
+for links in soup.find_all('div',class_="filters__results-list"):
+    print(links.get_text())
+
+driver.close()
 #print(result.status_code)
 #src = result.content
 #print(src)
