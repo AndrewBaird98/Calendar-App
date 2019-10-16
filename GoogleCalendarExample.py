@@ -1,19 +1,3 @@
-##from __future__ import print_function
-##from apiclient.discovery import build
-##from httplib2 import Http
-##
-##import datetime
-##import pickle
-##import os.path
-##from googleapiclient.discovery import build
-##from google_auth_oauthlib.flow import InstalledAppFlow
-##from google.auth.transport.requests import Request
-#try:
-#    import argparse
-#    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-#except ImportError:
-#    flags = None        
-
 # If modifying these scopes, delete the file token.pickle.
 from __future__ import print_function
 import datetime
@@ -26,7 +10,9 @@ from google.auth.transport.requests import Request
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 
-def main():
+def getAPI():
+    
+
     """Shows basic usage of the Google Calendar API.
     Prints the start and name of the next 10 events on the user's calendar.
     """
@@ -50,12 +36,14 @@ def main():
             pickle.dump(creds, token)
 
     service = build('calendar', 'v3', credentials=creds)
+    return service
 
-    # Call the Calendar API
+def printEvents(service, numOfEvents):
+     # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    print('Getting the upcoming 10 events')
+    print('Getting the upcoming events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
-                                        maxResults=10, singleEvents=True,
+                                        maxResults=numOfEvents, singleEvents=True,
                                         orderBy='startTime').execute()
     events = events_result.get('items', [])
 
@@ -65,9 +53,9 @@ def main():
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
-
-
-    # Refer to the Python quickstart on how to setup the environment:
+def AddEvent(service):
+    
+      # Refer to the Python quickstart on how to setup the environment:
     # https://developers.google.com/calendar/quickstart/python
     # Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
     # stored credentials.
@@ -102,6 +90,14 @@ def main():
 
     event = service.events().insert(calendarId='primary', body=event).execute()
     print ('Event created: %s' % (event.get('htmlLink')))
+
+def main():
+
+    service = getAPI()
+    AddEvent(service)
+    printEvents(service, 10)
+
+  
 if __name__ == '__main__':
     main() 
 
