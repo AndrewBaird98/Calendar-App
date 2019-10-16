@@ -52,6 +52,7 @@ class StartPage(tk.Frame):
 
         button1 = tk.Button(self, text="Go to Event Page", command=lambda: controller.show_frame("EventPage"))
         button2 = tk.Button(self, text="Go to Account Page", command=lambda: controller.show_frame("AccountPage"))
+        button3 = tk.Button(self, text="Google Calendar", command=lambda: controller.show_frame("GoogleCalendar"))
         button1.pack()
         button2.pack()
         textentry = tk.Text(self, width=20, height=1, wrap=tk.WORD, background="white")
@@ -87,6 +88,15 @@ class AccountPage(tk.Frame):
         button = tk.Button(self, text="Go to the start page",  command=lambda: controller.show_frame("StartPage"))
         button.pack()
 
+class GoogleCalendar(tk.Frame):
+
+    def __init__(self, parent, controller):
+        tk.Frame.__init__(self, parent)
+        self.controller = controller
+        label = tk.Label(self, text="GoogleCalendar", font=controller.title_font)
+        label.pack(side="right", fill="x", pady=100, padx = 100)
+        button = tk.Button(self, text="List Next 5 Events",  command=lambda: controller.show_frame("StartPage"))
+        button.pack()
 
 if __name__ == "__main__":
     app = SampleApp()
