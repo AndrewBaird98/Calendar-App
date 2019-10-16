@@ -53,7 +53,7 @@ def printEvents(service, numOfEvents, outputBox):
         start = event['start'].get('dateTime', event['start'].get('date'))
         outputBox.insert(tk.END, event['summary'])
 
-def AddEvent(service):
+def AddEvent(service, outputBox):
     
       # Refer to the Python quickstart on how to setup the environment:
     # https://developers.google.com/calendar/quickstart/python
