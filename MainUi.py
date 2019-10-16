@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import font  as tkfont
 import WebScraperTest
+import GoogleCalendar
 class SampleApp(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -15,7 +16,7 @@ class SampleApp(tk.Tk):
         container.grid_columnconfigure(0, weight=5)
 
         self.frames = {}
-        for F in (StartPage, EventPage, AccountPage):
+        for F in (StartPage, EventPage, AccountPage, GoogleCalendarPage):
             page_name = F.__name__
             frame = F(parent=container, controller=self)
             self.frames[page_name] = frame
@@ -52,9 +53,10 @@ class StartPage(tk.Frame):
 
         button1 = tk.Button(self, text="Go to Event Page", command=lambda: controller.show_frame("EventPage"))
         button2 = tk.Button(self, text="Go to Account Page", command=lambda: controller.show_frame("AccountPage"))
-        button3 = tk.Button(self, text="Google Calendar", command=lambda: controller.show_frame("GoogleCalendar"))
+        button3 = tk.Button(self, text="Go to Google Calendar Page", command=lambda: controller.show_frame("GoogleCalendarPage"))
         button1.pack()
         button2.pack()
+        button3.pack()
         textentry = tk.Text(self, width=20, height=1, wrap=tk.WORD, background="white")
         textentry.pack(side =tk.TOP)
 
@@ -88,15 +90,23 @@ class AccountPage(tk.Frame):
         button = tk.Button(self, text="Go to the start page",  command=lambda: controller.show_frame("StartPage"))
         button.pack()
 
-class GoogleCalendar(tk.Frame):
+class GoogleCalendarPage(tk.Frame):
 
-    def __init__(self, parent, controller):
+     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
         self.controller = controller
-        label = tk.Label(self, text="GoogleCalendar", font=controller.title_font)
-        label.pack(side="right", fill="x", pady=100, padx = 100)
-        button = tk.Button(self, text="List Next 5 Events",  command=lambda: controller.show_frame("StartPage"))
-        button.pack()
+        self.config(background = "blue")
+        label = tk.Label(self, text="GoogleCalendarPage", font=controller.title_font)
+        label.pack(side="left", fill="x", pady=10, padx = 10)
+        button = tk.Button(self, text="Go to the start page", command=lambda: controller.show_frame("StartPage"))
+        button.pack(side = "left")
+        outputBox = tk.Text(self , width= 30, height= 30, wrap= tk.WORD )
+        outputBox.pack()
+        service = GoogleCalendar.getAPI()
+        Button3 = tk.Button(self, text = "Print 10 events", command = lambda :GoogleCalendar.printEvents(service, 10, outputBox))
+        Button3.pack()
+        ExitButton= tk.Button(self, text="close window", command= lambda: controller.close())
+        ExitButton.pack(side= "right",pady=10, padx = 10)
 
 if __name__ == "__main__":
     app = SampleApp()
