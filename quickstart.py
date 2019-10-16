@@ -1,20 +1,3 @@
-##from __future__ import print_function
-##from apiclient.discovery import build
-##from httplib2 import Http
-##
-##import datetime
-##import pickle
-##import os.path
-##from googleapiclient.discovery import build
-##from google_auth_oauthlib.flow import InstalledAppFlow
-##from google.auth.transport.requests import Request
-#try:
-#    import argparse
-#    flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
-#except ImportError:
-#    flags = None        
-
-# If modifying these scopes, delete the file token.pickle.
 from __future__ import print_function
 import datetime
 import pickle
@@ -24,7 +7,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
 # If modifying these scopes, delete the file token.pickle.
-SCOPES = ['https://www.googleapis.com/auth/calendar']
+SCOPES = ['https://www.googleapis.com/auth/calendar.readonly']
 
 def main():
     """Shows basic usage of the Google Calendar API.
@@ -65,44 +48,5 @@ def main():
         start = event['start'].get('dateTime', event['start'].get('date'))
         print(start, event['summary'])
 
-
-
-    # Refer to the Python quickstart on how to setup the environment:
-    # https://developers.google.com/calendar/quickstart/python
-    # Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
-    # stored credentials.
-
-    event = {
-       'summary': 'Testing',
-      'location': '123 goodwin drive, Vista, CA 92083',
-      'description': 'yay it worked :)',
-      'start': {
-        'dateTime': '2019-10-28T09:00:00-07:00',
-        'timeZone': 'America/Los_Angeles',
-      },
-      'end': {
-        'dateTime': '2019-10-28T17:00:00-07:00',
-        'timeZone': 'America/Los_Angeles',
-      },
-      'recurrence': [
-        'RRULE:FREQ=DAILY;COUNT=2'
-      ],
-      'attendees': [
-        {'email': 'bairdandrew98@gmail.com'},
-        {'email': 'sbrin@example.com'},
-      ],
-      'reminders': {
-        'useDefault': False,
-        'overrides': [
-          {'method': 'email', 'minutes': 24 * 60},
-          {'method': 'popup', 'minutes': 10},
-        ],
-      },
-    }
-
-    event = service.events().insert(calendarId='primary', body=event).execute()
-    print ('Event created: %s' % (event.get('htmlLink')))
 if __name__ == '__main__':
-    main() 
-
-
+    main()
