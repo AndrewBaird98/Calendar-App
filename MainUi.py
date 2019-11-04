@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import font  as tkfont
 import WebScraperTest
 import GoogleCalendar
+from Event import Event
 class SampleApp(tk.Tk):
 
     def __init__(self, *args, **kwargs):
@@ -103,10 +104,11 @@ class GoogleCalendarPage(tk.Frame):
         outputBox = tk.Text(self , width= 30, height= 30, wrap= tk.WORD )
         outputBox.pack()
         service = GoogleCalendar.getAPI()
-        a = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6", "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21", 'RRULE:FREQ=DAILY;COUNT=2;', attendees)
+        attendees = ['baird013@cougars.csusm.edu']
+        currentEvent = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6", "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21", 'RRULE:FREQ=DAILY;COUNT=2;', attendees)
         Button2 = tk.Button(self, text = "Print 10 events", command = lambda :GoogleCalendar.printEvents(service, 10, outputBox))
         Button2.pack()
-        Button3 = tk.Button(self, text = "Add event", command = lambda :GoogleCalendar.AddEvent(service,outputBox, Event))
+        Button3 = tk.Button(self, text = "Add event", command = lambda :GoogleCalendar.AddEvent(service,outputBox, currentEvent))
         Button3.pack()
         ExitButton= tk.Button(self, text="close window", command= lambda: controller.close())
         ExitButton.pack(side= "right",pady=10, padx = 10)

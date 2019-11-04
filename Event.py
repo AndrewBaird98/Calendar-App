@@ -1,11 +1,11 @@
 class Event:
    
 #initiates event attributes
-    def __init__(self, name, date, startTime, endTime city, state, price, address, category, description, link, restriction, recurrence, attendees):
+    def __init__(self, name, date, startTime, endTime, city, state, price, address, category, description, link, restriction, recurrence, attendees):
         self.name = name
         self.date = date
         self.startTime = startTime
-        seld.endTime = endTime
+        self.endTime = endTime
         self.city = city
         self.state = state
         self.price = price
@@ -36,9 +36,9 @@ class Event:
 
 
 
-attendees = [baird013@cougars.csusm.edu]
+#attendees = ['baird013@cougars.csusm.edu']
 #initilize event attributes
-a = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6", "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21", 'RRULE:FREQ=DAILY;COUNT=2;', attendees)
+#a = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6", "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21", 'RRULE:FREQ=DAILY;COUNT=2;', attendees)
 
 #display them
-a.displayExample()
+#a.displayExample()

@@ -3,7 +3,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
-import Event
+from Event import Event
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -82,8 +82,8 @@ def AddEvent(service, outputBox, Event):
         #'RRULE:FREQ=DAILY;COUNT=2'
       ],
       'attendees': [
-        {'email': Event.attendees[0]},
-        {'email': Event.attendees[1]},
+        {'email': Event.attendees[0]}#,
+        #{'email': Event.attendees[1]},
       ],
       'reminders': {
         'useDefault': False,
