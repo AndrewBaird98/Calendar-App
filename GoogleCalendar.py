@@ -3,6 +3,7 @@ from __future__ import print_function
 import datetime
 import pickle
 import os.path
+import Event
 from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
@@ -53,31 +54,36 @@ def printEvents(service, numOfEvents, outputBox):
         start = event['start'].get('dateTime', event['start'].get('date'))
         outputBox.insert(tk.END, event['summary'])
 
-def AddEvent(service, outputBox):
+def AddEvent(service, outputBox, Event):
     
       # Refer to the Python quickstart on how to setup the environment:
     # https://developers.google.com/calendar/quickstart/python
     # Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
     # stored credentials.
-
+    location = Event.address + ', ' + Event.city + ', ' + Event.state
+    startDateTime = Event.date + 'T' + Event.startTime
+    endDateTime = Event.date + 'T' + Event.endTime
     event = {
-       'summary': 'Testing',
-      'location': '123 goodwin drive, Vista, CA 92083',
-      'description': 'yay it worked :)',
+       'summary': Event.name,
+      'location': location,
+      'description': Event.description,
       'start': {
-        'dateTime': '2019-10-28T09:00:00-07:00',
+        #'dateTime': '2019-10-28T09:00:00-07:00',
+        'dateTime': startDateTime,
         'timeZone': 'America/Los_Angeles',
       },
       'end': {
-        'dateTime': '2019-10-28T17:00:00-07:00',
+        'dateTime': endDateTime,
+        #'dateTime': '2019-10-28T17:00:00-07:00',
         'timeZone': 'America/Los_Angeles',
       },
       'recurrence': [
-        'RRULE:FREQ=DAILY;COUNT=2'
+        Event.recurrence
+        #'RRULE:FREQ=DAILY;COUNT=2'
       ],
       'attendees': [
-        {'email': 'bairdandrew98@gmail.com'},
-        {'email': 'sbrin@example.com'},
+        {'email': Event.attendees[0]},
+        {'email': Event.attendees[1]},
       ],
       'reminders': {
         'useDefault': False,
@@ -91,14 +97,14 @@ def AddEvent(service, outputBox):
     event = service.events().insert(calendarId='primary', body=event).execute()
     outputBox.insert(tk.END, 'Event created: %s' % (event.get('htmlLink')))
 
-def main():
+#def main():
 
-    service = getAPI()
-    AddEvent(service)
-    printEvents(service, 10)
+ #   service = getAPI()
+  #  AddEvent(service)
+   # printEvents(service, 10)
 
   
-if __name__ == '__main__':
-    main() 
+#if __name__ == '__main__':
+ #   main() 
 
 
