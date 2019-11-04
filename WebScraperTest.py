@@ -25,6 +25,9 @@ def FindEvents(outputBox):
         E = Event(links.find('a',class_="result__title-link").get_text(),links.find('div',class_="result__dates").get_text(),
                   "Not Know","Not Known","Not Known","Not Known","Not Known", links.find('div',class_="result__tag").get_text(),
                   "Not Know",links.find('a',class_="result__cta-link").get('href'),"Not Known")
+        price = links.find('div',class_="result__price")
+        if price:
+            E.price=price.get_text()
         E.displayExample()
         #print(links.find('div',class_="result__tag").get_text())
         outputBox.insert(tk.END, links.get_text())
