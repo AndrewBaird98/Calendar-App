@@ -18,7 +18,7 @@ def FindEvents(outputBox):
     driver = webdriver.Chrome(executable_path=chromedriver, options=options)
     driver.get("https://www.sandiego.org/explore/events.aspx")
     driver.find_element_by_xpath('//button[@class="submit-button__secondary load-more"]').click()
-    time.sleep(5)
+    time.sleep(0.1)
     soup = BeautifulSoup(driver.page_source,'lxml')
     #print(soup)
     eventlist = []
@@ -28,7 +28,7 @@ def FindEvents(outputBox):
                   "Not Know","Not Known","Not Known","Not Known","Not Known", links.find('div',class_="result__tag").get_text(),
                   "Not Know",links.find('a',class_="result__cta-link").get('href'),"Not Known", "Not Known", "Not Known", "Not Known")
 
-        outputBox.append(links.find('div', class_="result__tag").get_text())
+        outputBox.append(links.get_text())
         #E.displayExample()
 
 
