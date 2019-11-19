@@ -44,7 +44,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.popup.setIcon(QtWidgets.QMessageBox.Information)
         self.popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
         WebScraperTest.EventInfoGrab(EventManager.FullEventList[i], self.popup)
-        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup)
+        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup) 
 
         self.popup.exec_()
 
