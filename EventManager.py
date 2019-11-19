@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 #Event Manager lists
 FullEventList = []
 SortedEventList = []
-
+CategoriesList = []
 
 def FindEvents():
     if len(FullEventList) == 0:
@@ -24,7 +24,7 @@ def FindEvents():
         driver = webdriver.Chrome(executable_path=chromedriver, options=options)
         driver.get("https://www.sandiego.org/explore/events.aspx")
         driver.find_element_by_xpath('//button[@class="submit-button__secondary load-more"]').click()
-        time.sleep(0.1)
+        time.sleep(0.5)
         soup = BeautifulSoup(driver.page_source,'lxml')
         #print(soup)
         eventlist = []
@@ -58,16 +58,21 @@ def EventInfoDisplay(EInfo,OutPutBox):
         for found in extraBlocks:
             OutPutBox.append(found.text)
     except NoSuchElementException:
+        print("No extra information found")
         pass
     driver.close()
 # to be displayed in the UI That way we have one main display
+# maybe becomes part of the UI class instead of the event manger class?
 def DisplayTheList(List):
     for e in List:
         #To pe printed on to the UI
         e.displayExample()
 def SortTheList(Sortby):
     print("hello")
-
+def CollectCategories():
+    for e in FullEventList:
+        if e.category not in CategoriesList:
+            CategoriesList.append(e.category)
 
 if __name__ == '__main__':
     # so it does not run at import and wait to use the functions
