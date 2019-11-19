@@ -44,7 +44,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.popup.setIcon(QtWidgets.QMessageBox.Information)
         self.popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
         WebScraperTest.EventInfoGrab(EventManager.FullEventList[i], self.popup)
-        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup) 
+        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup)
 
         self.popup.exec_()
 
@@ -77,10 +77,8 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.HomeWidget.setStyleSheet("background-color: rgb(76, 76, 76);")
             self.tableWidget.setStyleSheet("background-color: rgb(128, 128, 128);")
             self.MyEventsTab.setStyleSheet("background-color: rgb(76, 76, 76);")
-            self.textBrowser.setStyleSheet("background-color: rgb(128, 128, 128);\n"
-                                           "color: rgb(255, 255, 255);")
-            self.FindEvents.setStyleSheet("color: rgb(255, 255, 255);\n"
-                                          "background-color: rgb(128, 0, 64);")
+            self.scrollArea.setStyleSheet("background-color: rgb(76, 76, 76);")
+            self.scrollAreaWidgetContents.setStyleSheet("background-color: rgb(76, 76, 76);")
             self.textBrowser_2.setStyleSheet("background-color: rgb(128, 128, 128);\n"
                                              "color: rgb(255, 255, 255);")
             self.AddEventsCalndar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
@@ -89,6 +87,10 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
                                                    "color: rgb(255, 255, 255);")
             self.frame_2.setStyleSheet("background-color: rgb(25, 25, 25);")
             self.tableWidget.setStyleSheet("background-color: rgb(128, 128, 128);")
+
+            for i in self.labelList:
+                i.setStyleSheet("background-color: rgb(128, 128, 128);\n"
+                                           "color: rgb(255, 255, 255);")
 
         else:
             self.centralwidget.setStyleSheet("default")
@@ -110,6 +112,11 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.PrintEventsCalendar.setStyleSheet("default")
             self.frame_2.setStyleSheet("background-color: rgb(7, 64, 128);")
             self.tableWidget.setStyleSheet("default")
+            self.scrollArea.setStyleSheet("default")
+            self.scrollAreaWidgetContents.setStyleSheet("default")
+            for i in self.labelList:
+                i.setStyleSheet("background-color: rgb(255, 255, 255);\n"
+                                           "color: rgb(0, 0, 0);")
 
 
 
