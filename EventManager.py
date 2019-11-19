@@ -48,15 +48,15 @@ def EventInfoDisplay(EInfo,popup):
     try:
         EventDescription = driver.find_element_by_class_name('header-component__content')
        # print(EventDescription.text)
-        popup.setText(EventDescription.text)
+        popup.append(EventDescription.text)
     except NoSuchElementException:
         #print("No Other Description found")
-        popup.setText("No description found")
+        popup.append("No description found")
     try:
         extraBlocks = driver.find_elements_by_class_name('extra-block')
         extraBlocks.pop(0)
         for found in extraBlocks:
-            popup.setText(found.text)
+            popup.append(found.text)
     except NoSuchElementException:
         print("No extra information found")
         pass

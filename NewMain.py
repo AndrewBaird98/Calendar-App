@@ -5,12 +5,15 @@ import ProjectUI
 import WebScraperTest
 import GoogleCalendar
 import EventManager
+import ProjectUI2
 from functools import partial
 
 class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def __init__(self):
         super(MyQtAPP, self).__init__()
         self.setupUi(self)
+        self.ui = ProjectUI2.Ui_EventWindow()
+        self.window = QtWidgets.QMainWindow()
 
 
         self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
@@ -40,13 +43,9 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.labelList.append(label)
 
     def oneEventInfo(self, i):
-
-        self.popup.setIcon(QtWidgets.QMessageBox.Information)
-        self.popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
-        WebScraperTest.EventInfoGrab(EventManager.FullEventList[i], self.popup)
-        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup)
-
-        self.popup.exec_()
+        self.ui.setupUi(self.window)
+        EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser)
+        self.window.show()
 
     def GoogleAddEvent(self):
         service = GoogleCalendar.getAPI()
