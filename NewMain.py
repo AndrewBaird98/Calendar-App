@@ -4,23 +4,49 @@ from Event import Event
 import ProjectUI
 import WebScraperTest
 import GoogleCalendar
+import EventManager
 from functools import partial
 
 class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
     def __init__(self):
         super(MyQtAPP, self).__init__()
         self.setupUi(self)
-        self.FindEvents.clicked.connect(self.EventPage)
+
 
         self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
         self.PrintEventsCalendar.clicked.connect(self.GooglePrintEvent)
 
+        self.labelList = []
+        EventManager.FindEvents()
+        self.EventPage()
+        for i in range(len(self.labelList)):
+            self.labelList[i].mousePressEvent = lambda event: self.oneEventInfo(i)
+
         self.DarkModeButton.toggled.connect(self.DarkMode)
 
-    def EventPage(self):
-        self.textBrowser.clear()
-        WebScraperTest.FindEvents(self.textBrowser)
 
+    def EventPage(self):
+        for e in EventManager.FullEventList:
+            label = QtWidgets.QLabel(self.scrollAreaWidgetContents)
+            label.setMinimumSize(QtCore.QSize(0, 40))
+            label.setCursor(QtCore.Qt.PointingHandCursor)
+            label.setStyleSheet("background-color: rgb(255, 255, 255);")
+            label.setMargin(6)
+            label.setWordWrap(True)
+            label.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse | QtCore.Qt.TextSelectableByMouse)
+            label.setObjectName("label")
+            label.setText(e.name + "\n    " + e.date)
+            self.verticalLayout_2.addWidget(label)
+            self.labelList.append(label)
+
+    def oneEventInfo(self, i):
+
+        self.popup.setIcon(QtWidgets.QMessageBox.Information)
+        self.popup.setStandardButtons(QtWidgets.QMessageBox.Ok)
+        WebScraperTest.EventInfoGrab(EventManager.FullEventList[i], self.popup)
+        #EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.popup)
+
+        self.popup.exec_()
 
     def GoogleAddEvent(self):
         service = GoogleCalendar.getAPI()
@@ -79,8 +105,6 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.CalendarTab.setStyleSheet("default")
             self.tableWidget.setStyleSheet("default")
             self.MyEventsTab.setStyleSheet("default")
-            self.textBrowser.setStyleSheet("default")
-            self.FindEvents.setStyleSheet("default")
             self.textBrowser_2.setStyleSheet("default")
             self.AddEventsCalndar.setStyleSheet("default")
             self.PrintEventsCalendar.setStyleSheet("default")
