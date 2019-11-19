@@ -23,7 +23,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         EventManager.FindEvents()
         self.EventPage()
         for i in range(len(self.labelList)):
-            self.labelList[i].mousePressEvent = lambda event: self.oneEventInfo(i)
+            self.labelList[i].mousePressEvent = lambda event, x=i : self.oneEventInfo(x)
 
         self.DarkModeButton.toggled.connect(self.DarkMode)
 
