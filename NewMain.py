@@ -16,7 +16,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.window = QtWidgets.QMainWindow()
 
 
-        self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
+        #self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
         self.PrintEventsCalendar.clicked.connect(self.GooglePrintEvent)
 
         self.labelList = []
@@ -47,17 +47,15 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser,EventManager.FullEventList,i)
         self.window.show()
 
-    def GoogleAddEvent(self):
-        service = GoogleCalendar.getAPI()
-        attendees = ['baird013@cougars.csusm.edu']
-        currentEvent = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6",
-                             "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21",
-                             'RRULE:FREQ=DAILY;COUNT=2;', attendees)
-        GoogleCalendar.AddEvent(service, self.textBrowser_2, currentEvent)
+    #def GoogleAddEvent(self):
+        #service = GoogleCalendar.getAPI()
+        #attendees = ['baird013@cougars.csusm.edu']
+        #currentEvent = Event("Taco Tuesday", "2019-11-30", "300 San Marcos Blvd, San Marcos, CA", "09:00:00-07:00", "17:00:00-07:00", "$6", "Nightlife", "Enjoy Tacos half price", "www.google.com")
+        #GoogleCalendar.AddEvent(service, self.textBrowser_2, currentEvent)
 
-    def GooglePrintEvent(self):
+    def GooglePrintEvent(self, numOfEvents):
         service = GoogleCalendar.getAPI()
-        GoogleCalendar.printEvents(service, 10, self.textBrowser_2)
+        GoogleCalendar.printEvents(service, 30, self.textBrowser_2)
 
 
     def DarkMode(self):
@@ -80,8 +78,8 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.scrollAreaWidgetContents.setStyleSheet("background-color: rgb(76, 76, 76);")
             self.textBrowser_2.setStyleSheet("background-color: rgb(128, 128, 128);\n"
                                              "color: rgb(255, 255, 255);")
-            self.AddEventsCalndar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
-                                                "color: rgb(255, 255, 255);")
+            #self.AddEventsCalndar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
+                                             #   "color: rgb(255, 255, 255);")
             self.PrintEventsCalendar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
                                                    "color: rgb(255, 255, 255);")
             self.frame_2.setStyleSheet("background-color: rgb(25, 25, 25);")

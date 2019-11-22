@@ -35,7 +35,7 @@ def FindEvents():
             #print(links.find('div', class_="result__tag").get_text())
             E = Event(links.find('a',class_="result__title-link").get_text(), links.find('div',class_="result__dates").get_text(),
                   "No Location","Not Know","Not Know", "not Know",links.find('div',class_="result__tag").get_text(),"Not Known",
-                   links.find('a',class_="result__cta-link").get('href'),"Not Know","Not Known","Not Known")
+                   links.find('a',class_="result__cta-link").get('href'))
             FullEventList.append(E)
 
         driver.close()

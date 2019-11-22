@@ -43,7 +43,7 @@ def getAPI():
 def printEvents(service, numOfEvents, outputBox):
      # Call the Calendar API
     now = datetime.datetime.utcnow().isoformat() + 'Z' # 'Z' indicates UTC time
-    outputBox.append('Getting the upcoming events')
+    outputBox.append('Getting the upcoming ' + str(numOfEvents) + ' events')
     events_result = service.events().list(calendarId='primary', timeMin=now,
                                         maxResults=numOfEvents, singleEvents=True,
                                         orderBy='startTime').execute()
@@ -61,12 +61,12 @@ def AddEvent(service, outputBox, Event):
     # https://developers.google.com/calendar/quickstart/python
     # Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
     # stored credentials.
-    location = Event.address + ', ' + Event.city + ', ' + Event.state
     startDateTime = Event.date + 'T' + Event.startTime
     endDateTime = Event.date + 'T' + Event.endTime
+    Event.description = Event.description + '\n' + Event.link
     event = {
        'summary': Event.name,
-      'location': location,
+      'location': Event.location,
       'description': Event.description,
       'start': {
         #'dateTime': '2019-10-28T09:00:00-07:00',
@@ -78,14 +78,14 @@ def AddEvent(service, outputBox, Event):
         #'dateTime': '2019-10-28T17:00:00-07:00',
         'timeZone': 'America/Los_Angeles',
       },
-      'recurrence': [
-        Event.recurrence
-        #'RRULE:FREQ=DAILY;COUNT=2'
-      ],
-      'attendees': [
-        {'email': Event.attendees[0]}#,
-        #{'email': Event.attendees[1]},
-      ],
+      #'recurrence': [
+      #  Event.recurrence
+      #  #'RRULE:FREQ=DAILY;COUNT=2'
+      #],
+      #'attendees': [
+      #  {'email': Event.attendees[0]}#,
+      #  #{'email': Event.attendees[1]},
+      #],
       'reminders': {
         'useDefault': False,
         'overrides': [
