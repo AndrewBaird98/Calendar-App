@@ -2,7 +2,7 @@ class Event:
    
 #initiates event attributes
     #def __init__(self, name, date, location, startTime, endTime, price, category, description, link, restriction, recurrence, attendees):
-    def __init__(self, name, date, location, startTime, endTime, price, category, description, link):
+    def __init__(self, name, date, location, startTime, endTime, price, category, description, link,filled,contact,dateTime):
         self.name = name
         self.date = date
         self.location = location
@@ -12,7 +12,9 @@ class Event:
         self.category = category
         self.description = description
         self.link = link
-
+        self.Filled =filled
+        self.Contact = contact
+        self.DateTime=dateTime
 #this function used as an example to display event attrubites
     def displayExample(self):
         print(self.name)
