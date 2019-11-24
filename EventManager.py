@@ -55,6 +55,11 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
             try:
                 ShowMore = driver.find_element_by_xpath('//div[@class="links"]').click()
                 time.sleep(1)
+                try:
+                    LoadMore= driver.find_element_by_class_name('off').click()
+                    time.sleep(1)
+                except ElementClickInterceptedException:
+                    pass
             except ElementClickInterceptedException:
                 pass
             EventDescription = driver.find_element_by_class_name('header-component__content')
@@ -71,7 +76,7 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
             try:
                 h3Check = Location.find_element_by_tag_name('h3')
                 compareText = h3Check.text
-                print(compareText)
+                #print(compareText)
                 if "Neighborhood:" in compareText:
                     CompletedEvent.location = Location.text
                     popup.append(CompletedEvent.location)
