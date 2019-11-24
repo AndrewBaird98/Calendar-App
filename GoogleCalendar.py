@@ -78,14 +78,6 @@ def AddEvent(service, outputBox, Event):
         #'dateTime': '2019-10-28T17:00:00-07:00',
         'timeZone': 'America/Los_Angeles',
       },
-      #'recurrence': [
-      #  Event.recurrence
-      #  #'RRULE:FREQ=DAILY;COUNT=2'
-      #],
-      #'attendees': [
-      #  {'email': Event.attendees[0]}#,
-      #  #{'email': Event.attendees[1]},
-      #],
       'reminders': {
         'useDefault': False,
         'overrides': [
@@ -97,15 +89,3 @@ def AddEvent(service, outputBox, Event):
 
     event = service.events().insert(calendarId='primary', body=event).execute()
     outputBox.append('Event created: %s' % (event.get('htmlLink')))
-
-#def main():
-
- #   service = getAPI()
-  #  AddEvent(service)
-   # printEvents(service, 10)
-
-  
-#if __name__ == '__main__':
- #   main() 
-
-

@@ -5,6 +5,7 @@ import os,sys,inspect
 import time
 from Event import Event
 from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException
+from selenium.common.exceptions import NoSuchElementException
 
 
 #Event Manager lists
@@ -28,6 +29,8 @@ def FindEvents():
         time.sleep(0.3)
         LoadMore.click()
         time.sleep(0.3)
+        driver.find_element_by_xpath('//button[@class="submit-button__secondary load-more"]').click()
+        time.sleep(0.5)
         soup = BeautifulSoup(driver.page_source,'lxml')
         #print(soup)
         eventlist = []
@@ -111,6 +114,35 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
        popup.append(EInfo.DateTime)
        popup.append(EInfo.price)
 
+       E = Event(links.find('a',class_="result__title-link").get_text(),links.find('div',class_="result__dates").get_text(), "Not Know","Not Known","Not Known","Not Known","Not Known", links.find('div',class_="result__tag").get_text(), "Not Know","Not Known",links.find('a',class_="result__cta-link").get('href'), "Not Known", "Not Known", "Not Known")
+       FullEventList.append(E)
+
+       driver.close()
+def EventInfoDisplay(EInfo,popup):
+    current_folder = os.path.realpath(os.path.abspath(os.path.split(inspect.getfile(inspect.currentframe()))[0]))
+    chromedriver = os.path.join(current_folder, "chromedriver")
+    options = Options()
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--incognito')
+    options.add_argument('--headless')
+    driver = webdriver.Chrome(executable_path=chromedriver, options=options)
+    driver.get(EInfo.link)
+    try:
+        EventDescription = driver.find_element_by_class_name('header-component__content')
+       # print(EventDescription.text)
+        popup.append(EventDescription.text)
+    except NoSuchElementException:
+        #print("No Other Description found")
+        popup.append("No description found")
+    try:
+        extraBlocks = driver.find_elements_by_class_name('extra-block')
+        extraBlocks.pop(0)
+        for found in extraBlocks:
+            popup.append(found.text)
+    except NoSuchElementException:
+        print("No extra information found")
+        pass
+    driver.close()
 # to be displayed in the UI That way we have one main display
 # maybe becomes part of the UI class instead of the event manger class?
 def DisplayTheList(List):

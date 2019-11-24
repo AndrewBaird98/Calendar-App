@@ -85,4 +85,3 @@ def EventInfoGrab(Einfo,popup):
 #for div_tag in soup.find_all("div"):
    # urls.append(div_tag)
 #for tag in urls:
-   # print(tag)

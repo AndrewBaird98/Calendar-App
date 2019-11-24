@@ -15,6 +15,7 @@ class Event:
         self.Filled =filled
         self.Contact = contact
         self.DateTime=dateTime
+
 #this function used as an example to display event attrubites
     def displayExample(self):
         print(self.name)
@@ -28,3 +29,4 @@ class Event:
         print(self.category)
         print(self.description)
         print(self.link)
+
