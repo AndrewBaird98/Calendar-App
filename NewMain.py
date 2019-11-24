@@ -45,6 +45,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser,EventManager.FullEventList,i)
         self.window.show()
         self.ui.AddToFavoritesButton.clicked.connect(lambda: self.AddToFavorites(i))
+        self.ui.AddToCalendarButton.clicked.connect(lambda: self.GoogleAddEvent(i))
 
     def AddToFavorites(self, i):
         for x in self.FavoritesEventThere:
@@ -108,13 +109,11 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             else:
                 return
 
-    def GoogleAddEvent(self):
+    def GoogleAddEvent(self, i):
         service = GoogleCalendar.getAPI()
-       # attendees = ['baird013@cougars.csusm.edu']
-       # currentEvent = Event("Taco Tuesday", "2019-11-28", "09:00:00-07:00", "17:00:00-07:00", "San Marcos", "CA", "$6",
-       #                      "300 San Marcos Blvd", "Nightlife", "Enjoy Tacos half price", "www.google.com", "+21",
-       #                      'RRULE:FREQ=DAILY;COUNT=2;', attendees)
-       # GoogleCalendar.AddEvent(service, self.textBrowser_2, currentEvent)
+        #currentEvent = Event("Testing Calendar", "2019-11-30", "123 GoodWay drive, San Marcos, CA", "09:00:00-07:00", "17:00:00-07:00", "$6",
+                            # "Nightlife", "Enjoy Tacos half price", "www.google.com", None, None, None)
+        GoogleCalendar.AddEvent(service, self.textBrowser_2, EventManager.FullEventList[i])
 
     def GooglePrintEvent(self):
         service = GoogleCalendar.getAPI()
