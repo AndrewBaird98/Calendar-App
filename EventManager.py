@@ -6,6 +6,7 @@ import time
 from Event import Event
 from selenium.common.exceptions import NoSuchElementException,ElementClickInterceptedException
 
+
 #Event Manager lists
 FullEventList = []
 SortedEventList = []
@@ -27,11 +28,16 @@ def FindEvents():
         time.sleep(0.3)
         LoadMore.click()
         time.sleep(0.3)
-        E = Event(links.find('a',class_="result__title-link").get_text(), links.find('div',class_="result__dates").get_text(),
+        soup = BeautifulSoup(driver.page_source,'lxml')
+        #print(soup)
+        eventlist = []
+        for links in soup.find_all('section',class_="result"):
+            #print(links.find('div', class_="result__tag").get_text())
+            E = Event(links.find('a',class_="result__title-link").get_text(), links.find('div',class_="result__dates").get_text(),
                   "No Location","Not Know","Not Know", "not Know",links.find('div',class_="result__tag").get_text(),"Not Known",
                    links.find('a',class_="result__cta-link").get('href'),"Not Filled","Not Contact",
                       "No DateTime")
-        FullEventList.append(E)
+            FullEventList.append(E)
 
         driver.close()
 def EventInfoDisplay(EInfo,popup,PassedList,index):
@@ -105,14 +111,19 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
        popup.append(EInfo.DateTime)
        popup.append(EInfo.price)
 
-       E = Event(links.find('a',class_="result__title-link").get_text(),links.find('div',class_="result__dates").get_text(), "Not Know","Not Known","Not Known","Not Known","Not Known", links.find('div',class_="result__tag").get_text(), "Not Know","Not Known",links.find('a',class_="result__cta-link").get('href'), "Not Known", "Not Known", "Not Known")
-       FullEventList.append(E)
+# to be displayed in the UI That way we have one main display
+# maybe becomes part of the UI class instead of the event manger class?
+def DisplayTheList(List):
+    for e in List:
+        #To pe printed on to the UI
+        e.displayExample()
+def SortTheList(Sortby):
+    print("hello")
+def CollectCategories():
+    for e in FullEventList:
+        if e.category not in CategoriesList:
+            CategoriesList.append(e.category)
 
-       driver.close()
-       E = Event(links.find('a',class_="result__title-link").get_text(),links.find('div',class_="result__dates").get_text(),
-                  "Not Know","Not Known","Not Known","Not Known","Not Known", links.find('div',class_="result__tag").get_text(),
-                  "Not Know","Not Known",links.find('a',class_="result__cta-link").get('href'), "Not Known", "Not Known", "Not Known")
-       FullEventList.append(E)
-
-       driver.close()
+if __name__ == '__main__':
+    # so it does not run at import and wait to use the functions
     print('should not run')

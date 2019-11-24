@@ -14,7 +14,7 @@ class Event:
         self.link = link
         self.Filled =filled
         self.Contact = contact
-        self.DateTime=dateTim
+        self.DateTime=dateTime
 
 #this function used as an example to display event attrubites
     def displayExample(self):

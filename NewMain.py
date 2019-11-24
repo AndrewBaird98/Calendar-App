@@ -12,7 +12,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.ui = ProjectUI2.Ui_EventWindow()
         self.window = QtWidgets.QMainWindow()
 
-        self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
+        #self.AddEventsCalndar.clicked.connect(self.GoogleAddEvent)
         self.PrintEventsCalendar.clicked.connect(self.GooglePrintEvent)
 
         self.labelList = []
@@ -42,8 +42,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
     def oneEventInfo(self, i):
         self.ui.setupUi(self.window)
-        EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser)
-
+        EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser,EventManager.FullEventList,i)
         self.window.show()
         self.ui.AddToFavoritesButton.clicked.connect(lambda: self.AddToFavorites(i))
 
@@ -146,8 +145,8 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.scrollAreaWidgetContents_2.setStyleSheet("background-color: rgb(76, 76, 76);")
             self.textBrowser_2.setStyleSheet("background-color: rgb(128, 128, 128);\n"
                                              "color: rgb(255, 255, 255);")
-            self.AddEventsCalndar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
-                                                "color: rgb(255, 255, 255);")
+            #self.AddEventsCalndar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
+            #                                    "color: rgb(255, 255, 255);")
             self.PrintEventsCalendar.setStyleSheet("background-color: rgb(128, 0, 64);\n"
                                                    "color: rgb(255, 255, 255);")
             self.frame_2.setStyleSheet("background-color: rgb(25, 25, 25);")
@@ -172,7 +171,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
             self.AllEventsTab.setStyleSheet("default")
             self.CalendarTab.setStyleSheet("default")
             self.textBrowser_2.setStyleSheet("default")
-            self.AddEventsCalndar.setStyleSheet("default")
+            #self.AddEventsCalndar.setStyleSheet("default")
             self.PrintEventsCalendar.setStyleSheet("default")
             self.frame_2.setStyleSheet("background-color: rgb(7, 64, 128);")
             self.scrollArea.setStyleSheet("default")
