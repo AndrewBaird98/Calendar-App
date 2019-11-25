@@ -44,6 +44,9 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.ui.setupUi(self.window)
         EventManager.EventInfoDisplay(EventManager.FullEventList[i], self.ui.textBrowser,EventManager.FullEventList,i)
         self.window.show()
+        findDateandTime = self.ui.dateTimeEdit.dateTime()
+        StringTime = findDateandTime.toString(self.ui.dateTimeEdit.displayFormat())
+        print(StringTime)
         self.ui.AddToFavoritesButton.clicked.connect(lambda: self.AddToFavorites(i))
         self.ui.AddToCalendarButton.clicked.connect(lambda: self.GoogleAddEvent(i))
 
