@@ -55,30 +55,30 @@ def printEvents(service, numOfEvents, outputBox):
         start = event['start'].get('dateTime', event['start'].get('date'))
         outputBox.append(event['summary'])
 
-def AddEvent(service, outputBox, Event):
+def AddEvent(service, outputBox, Event, startDateTime):
     
-      # Refer to the Python quickstart on how to setup the environment:
+    # Refer to the Python quickstart on how to setup the environment:
     # https://developers.google.com/calendar/quickstart/python
     # Change the scope to 'https://www.googleapis.com/auth/calendar' and delete any
     # stored credentials.
-    startDateTime = Event.date + 'T' + Event.startTime
-    endDateTime = Event.date + 'T' + Event.endTime
+    #startDateTime = Event.date + 'T' + Event.startTime
+    #endDateTime = Event.date + 'T' + Event.endTime
     Event.description = Event.description + '\n' + Event.link
     event = {
        'summary': Event.name,
       'location': Event.location,
       'description': Event.description,
       'start': {
-        #'dateTime': '2019-10-28T09:00:00-07:00',
+        #'dateTime': '2019-11-30T09:00:00-07:00',
         'dateTime': startDateTime,
         'timeZone': 'America/Los_Angeles',
       },
       'end': {
-        'dateTime': endDateTime,
-        #'dateTime': '2019-10-28T17:00:00-07:00',
+        'dateTime': startDateTime,
+        #'dateTime': '2019-11-30T09:00:00-07:00',
         'timeZone': 'America/Los_Angeles',
       },
-      'reminders': {
+        'reminders': {
         'useDefault': False,
         'overrides': [
           {'method': 'email', 'minutes': 24 * 60},
