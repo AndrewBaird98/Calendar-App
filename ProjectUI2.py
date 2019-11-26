@@ -77,6 +77,7 @@ class Ui_EventWindow(object):
         self.dateTimeEdit.setCurrentSection(QtWidgets.QDateTimeEdit.MonthSection)
         self.dateTimeEdit.setCalendarPopup(True)
         self.dateTimeEdit.setCurrentSectionIndex(0)
+        self.dateTimeEdit.setDateTime(QtCore.QDateTime.currentDateTime())
         self.dateTimeEdit.setTimeSpec(QtCore.Qt.LocalTime)
         self.dateTimeEdit.setObjectName("dateTimeEdit")
         self.horizontalLayout_2.addWidget(self.dateTimeEdit)
