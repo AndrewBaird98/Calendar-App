@@ -52,13 +52,8 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
         CompletedEvent = EInfo
         try:
             try:
-                ShowMore = driver.find_element_by_xpath('//div[@class="links"]').click()
+                LoadMore = driver.find_element_by_class_name('off').click()
                 time.sleep(1)
-                try:
-                    LoadMore= driver.find_element_by_class_name('off').click()
-                    time.sleep(1)
-                except ElementClickInterceptedException:
-                    pass
             except ElementClickInterceptedException:
                 pass
             EventDescription = driver.find_element_by_class_name('header-component__content')
