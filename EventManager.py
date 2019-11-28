@@ -51,18 +51,19 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
         driver.get(EInfo.link)
         CompletedEvent = EInfo
         try:
-            try:
-                LoadMore = driver.find_element_by_class_name('off').click()
-                time.sleep(1)
-            except ElementClickInterceptedException:
-                pass
-            EventDescription = driver.find_element_by_class_name('header-component__content')
-            # print(EventDescription.text)
+
+            LoadMore = driver.find_element_by_class_name('off').click()
+            time.sleep(1)
+            EventDescription = driver.find_element_by_class_name('header-component__content opened')
+             # print(EventDescription.text)
             CompletedEvent.description = EventDescription.text
             popup.append(EventDescription.text)
         except NoSuchElementException:
-                #print("No Other Description found")
-                popup.append("No description found")
+             #print("No Other Description found")
+            EventDescription = driver.find_element_by_class_name('header-component__content')
+            CompletedEvent.description = EventDescription.text
+            popup.append(EventDescription.text)
+            #popup.append("No description found")
         try:
             extraBlocks = driver.find_elements_by_class_name('extra-block')
             extraBlocks.pop(0)
