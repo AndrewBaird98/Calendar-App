@@ -9,8 +9,6 @@ from selenium.common.exceptions import NoSuchElementException,ElementClickInterc
 
 #Event Manager lists
 FullEventList = []
-SortedEventList = []
-CategoriesList = []
 
 def FindEvents():
     if len(FullEventList) == 0:
@@ -106,19 +104,8 @@ def EventInfoDisplay(EInfo,popup,PassedList,index):
        popup.append(EInfo.DateTime)
        popup.append(EInfo.price)
 
-# to be displayed in the UI That way we have one main display
-# maybe becomes part of the UI class instead of the event manger class?
-def DisplayTheList(List):
-    for e in List:
-        #To pe printed on to the UI
-        e.displayExample()
-def SortTheList(Sortby):
-    print("hello")
-def CollectCategories():
-    for e in FullEventList:
-        if e.category not in CategoriesList:
-            CategoriesList.append(e.category)
 
-if __name__ == '__main__':
-    # so it does not run at import and wait to use the functions
-    print('should not run')
+
+#if __name__ == '__main__':
+    # so it does not run at import and wait to use the functions since web scraper takes time
+    #print('should not run')
