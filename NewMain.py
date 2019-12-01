@@ -117,7 +117,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
 
     def GooglePrintEvent(self):
         service = GoogleCalendar.getAPI()
-        GoogleCalendar.printEvents(service, 10, self.textBrowser_2)
+        GoogleCalendar.printEvents(service, 25, self.textBrowser_2)
 
 
 
