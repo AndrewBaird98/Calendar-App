@@ -22,6 +22,7 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
         self.EventPage()
         for i in range(len(self.labelList)):
             self.labelList[i].mousePressEvent = lambda event, x=i: self.oneEventInfo(x)
+        self.service = GoogleCalendar.getAPI()
 
         self.DarkModeButton.toggled.connect(self.DarkMode)
 
@@ -110,14 +111,13 @@ class MyQtAPP(ProjectUI.Ui_MainWindow, QtWidgets.QMainWindow):
                 return
 
     def GoogleAddEvent(self, i):
-        service = GoogleCalendar.getAPI()
+
         findDateandTime = self.ui.dateTimeEdit.dateTime()
         StringDateTime = str(findDateandTime.toString("yyyy-MM-ddThh:mm:ss"))
-        GoogleCalendar.AddEvent(service, self.textBrowser_2, EventManager.FullEventList[i], StringDateTime)
+        GoogleCalendar.AddEvent(self.service, self.textBrowser_2, EventManager.FullEventList[i], StringDateTime)
 
     def GooglePrintEvent(self):
-        service = GoogleCalendar.getAPI()
-        GoogleCalendar.printEvents(service, 25, self.textBrowser_2)
+        GoogleCalendar.printEvents(self.service, 25, self.textBrowser_2)
 
 
 
